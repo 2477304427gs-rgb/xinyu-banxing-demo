@@ -4,9 +4,7 @@
 
 ## 在线预览
 
-🌐 GitHub Pages: `https://你的用户名.github.io/xinyu-banxing-demo/`
-
-> 部署后替换上方链接中的 `你的用户名` 为实际 GitHub 用户名。
+🌐 GitHub Pages: https://2477304427gs-rgb.github.io/xinyu-banxing-demo/
 
 ## 本地运行
 
