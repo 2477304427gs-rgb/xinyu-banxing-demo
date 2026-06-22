@@ -1,15 +1,14 @@
 /**
  * 心遇伴行 Demo - 游戏状态与羁绊系统
+ *
+ * 依赖 data.js 在全局作用域声明的 ANCHORS / MOODS / BOND_LEVELS / STORIES
  */
 
-// 兼容浏览器(script标签全局变量)与Node测试环境
-const _DATA = (typeof module !== 'undefined' && module.exports && typeof require !== 'undefined')
-  ? require('./data.js')
-  : (typeof window !== 'undefined' ? window : {});
-const ANCHORS = _DATA.ANCHORS;
-const MOODS = _DATA.MOODS;
-const BOND_LEVELS = _DATA.BOND_LEVELS;
-const STORIES = _DATA.STORIES;
+// Node 测试环境：加载 data.js 导出的数据到全局
+if (typeof module !== 'undefined' && module.exports && typeof require !== 'undefined') {
+  const data = require('./data.js');
+  Object.assign(global, data);
+}
 
 class GameState {
   constructor() {
@@ -146,6 +145,11 @@ class GameState {
 }
 
 const game = new GameState();
+
+// 暴露到全局，确保跨 script 标签可访问
+if (typeof window !== 'undefined') {
+  window.game = game;
+}
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { GameState, game };
