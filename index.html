@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>心遇伴行 · AI一对一剧情互动</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- 真人直播页 -->
+    <div id="live-page" class="page active">
+      <div class="live-bg" id="live-bg"></div>
+      <div class="live-overlay"></div>
+
+      <div class="live-header">
+        <div class="anchor-info" id="anchor-info">
+          <img id="anchor-avatar" class="anchor-avatar" src="" alt="主播头像" />
+          <div class="anchor-meta">
+            <span class="anchor-name" id="anchor-name">--</span>
+            <span class="anchor-followers" id="anchor-followers">--</span>
+          </div>
+          <button class="follow-btn">关注</button>
+        </div>
+        <div class="live-header-right">
+          <button class="icon-btn" id="btn-control" title="主播管控">⚙️</button>
+          <button class="icon-btn" id="btn-switch-anchor" title="切换主播">👤</button>
+          <button class="icon-btn">✕</button>
+        </div>
+      </div>
+
+      <div class="live-rank">
+        <div class="rank-pill">人气榜 <span>No.12</span></div>
+        <div class="rank-pill">2.7k 看过</div>
+      </div>
+
+      <div class="float-entry" id="float-entry">
+        <div class="float-icon">💕</div>
+        <div class="float-label">心遇伴行</div>
+      </div>
+
+      <div class="danmaku-area" id="danmaku-area">
+        <div class="danmaku"><span class="user">旭辉:</span> 牙疼</div>
+        <div class="danmaku"><span class="user">大叔。:</span> 主播好美</div>
+        <div class="danmaku"><span class="user">关关:</span> 是读阿姨</div>
+      </div>
+
+      <div class="live-footer">
+        <input class="chat-input" type="text" placeholder="说点什么..." />
+        <button class="footer-btn gift">🎁</button>
+        <button class="footer-btn menu">☰</button>
+        <button class="footer-btn share">↗</button>
+      </div>
+    </div>
+
+    <!-- AI剧情互动页 -->
+    <div id="story-page" class="page">
+      <div class="story-bg" id="story-bg">
+        <div class="stars"></div>
+      </div>
+
+      <div class="story-header">
+        <button class="back-btn" id="btn-back">←</button>
+        <div class="story-title" id="story-title">雨夜专属陪伴</div>
+        <button class="story-vip" id="btn-vip">会员</button>
+      </div>
+
+      <div class="bond-panel">
+        <div class="bond-icon">💞</div>
+        <div class="bond-track">
+          <div class="bond-fill" id="bond-fill"></div>
+        </div>
+        <div class="bond-text" id="bond-text">萍水相逢</div>
+      </div>
+
+      <div class="heroine-area">
+        <img class="heroine-svg" id="heroine-img" src="assets/placeholder/heroine.svg" alt="AI女主分身" />
+        <div class="heroine-tag">AI二次元分身 · 占位示意</div>
+      </div>
+
+      <div class="dialogue-box">
+        <div class="mood-tag" id="mood-tag">温柔迁就</div>
+        <div class="dialogue-text" id="dialogue-text"></div>
+      </div>
+
+      <div class="vip-float" id="vip-float">
+        <!-- 商业化卡片由 JS 渲染 -->
+      </div>
+
+      <div class="options-area" id="options-area">
+        <!-- 选项由 JS 渲染 -->
+      </div>
+
+      <div class="ending-box" id="ending-box">
+        <div class="ending-title" id="ending-title">剧情结局</div>
+        <div class="ending-desc" id="ending-desc">--</div>
+        <button class="ending-btn" id="ending-btn">返回直播间</button>
+      </div>
+
+      <div class="queue-toast" id="queue-toast">
+        <div class="spinner"></div>
+        <div class="queue-text">正在匹配专属AI分身...</div>
+        <div class="queue-sub">会员用户享有优先匹配特权</div>
+      </div>
+
+      <div class="voice-hint">* 语音为浏览器TTS占位演示</div>
+    </div>
+
+    <!-- 切换主播弹窗 -->
+    <div class="modal-overlay" id="modal-anchor">
+      <div class="modal-sheet">
+        <div class="modal-title">
+          选择陪伴对象
+          <button class="modal-close" data-close="modal-anchor">✕</button>
+        </div>
+        <div class="anchor-list" id="anchor-list"></div>
+      </div>
+    </div>
+
+    <!-- 主播管控弹窗 -->
+    <div class="modal-overlay" id="modal-control">
+      <div class="modal-sheet">
+        <div class="modal-title">
+          主播端管控
+          <button class="modal-close" data-close="modal-control">✕</button>
+        </div>
+        <div class="control-list">
+          <div class="control-row">
+            <div>
+              <div class="control-label">功能总开关</div>
+              <div class="control-desc">关闭后观众无法进入心遇伴行</div>
+            </div>
+            <div class="switch on" id="switch-enabled"></div>
+          </div>
+          <div class="control-row">
+            <div>
+              <div class="control-label">人设锁定</div>
+              <div class="control-desc">开播期间禁止修改AI外形/声线</div>
+            </div>
+            <div class="switch on" id="switch-lock"></div>
+          </div>
+          <button class="danger-btn" id="btn-clear-queue">清空当前互动队列</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
