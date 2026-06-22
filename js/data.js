@@ -297,3 +297,12 @@ const VIP_OFFERS = [
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { ANCHORS, MOODS, BOND_LEVELS, STORIES, VIP_OFFERS };
 }
+
+// 浏览器环境：显式挂载到 window，避免跨 script 标签访问问题
+if (typeof window !== 'undefined') {
+  window.ANCHORS = ANCHORS;
+  window.MOODS = MOODS;
+  window.BOND_LEVELS = BOND_LEVELS;
+  window.STORIES = STORIES;
+  window.VIP_OFFERS = VIP_OFFERS;
+}
